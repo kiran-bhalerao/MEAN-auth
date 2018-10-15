@@ -25,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/' }
 ]
 
 @NgModule({

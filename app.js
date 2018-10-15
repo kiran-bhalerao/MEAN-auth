@@ -22,7 +22,9 @@ app.use(bodyParser.urlencoded({
 //CORS MIDDLEWARE
 app.use(cors())
 
-
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'public/index.html'));
+});
 
 require('./config/passport')(passport);
 require('./routes/user')(app,passport);

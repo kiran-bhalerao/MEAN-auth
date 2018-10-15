@@ -15,16 +15,32 @@ export class AuthService {
   registerUser(user) {
     let headers = new Headers();
     headers.append('Content-type', 'application/json');
-    return this.http.post('http://localhost:3000/user/register', user, { headers })
+    return this.http.post('user/register', user, { headers })
       .pipe(map(res => res.json()));
   }
+
+  // devlompent version of registerUser()
+  // registerUser(user) {
+  //   let headers = new Headers();
+  //   headers.append('Content-type', 'application/json');
+  //   return this.http.post('http://localhost:3000/user/register', user, { headers })
+  //     .pipe(map(res => res.json()));
+  // }
 
   loginUser(user) {
     let headers = new Headers();
     headers.append('Content-type', 'application/json');
-    return this.http.post('http://localhost:3000/user/login', user, { headers })
+    return this.http.post('user/login', user, { headers })
       .pipe(map(res => res.json()));
   }
+
+  // devlompent version of loginUser()
+  // loginUser(user) {
+  //   let headers = new Headers();
+  //   headers.append('Content-type', 'application/json');
+  //   return this.http.post('http://localhost:3000/user/login', user, { headers })
+  //     .pipe(map(res => res.json()));
+  // }
 
   storeUser(token, user) {
     localStorage.setItem('id_token', token);
@@ -44,13 +60,28 @@ export class AuthService {
     this.loadUser();
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
-    return this.http.get('http://localhost:3000/user/profile', { headers })
-      .pipe(map(res => res.json()));
+    return this.http.post('user/profile', null, { headers })
+      .pipe(map(res => {
+        return res.json();
+      }));
   }
+  // devlompent version of getUser()
+  // getUser() {
+  //   let headers = new Headers();
+  //   this.loadUser();
+  //   headers.append('Authorization', this.authToken);
+  //   headers.append('Content-type', 'application/json');
+  //   return this.http.post('http://localhost:3000/user/profile', null, { headers })
+  //     .pipe(map(res => {
+  //       return res.json();
+  //     }));
+  // }
 
   loadUser() {
-    this.authToken = localStorage.getItem('id_token');
-    this.User = JSON.parse(localStorage.getItem('user'));
+    if (localStorage.getItem('id_token') && JSON.parse(localStorage.getItem('user'))) {
+      this.authToken = localStorage.getItem('id_token');
+      this.User = JSON.parse(localStorage.getItem('user'));
+    }
   }
 }
 

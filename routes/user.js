@@ -6,12 +6,12 @@ const config = require('../config/config');
 module.exports = (app, passport) => {
 
     //DUMMY 
-    app.get('/user', (req, res) => {
-        User.all()
-            .then((users) => {
-                res.send(users);
-            });
-    });
+    // app.get('/user', (req, res) => {
+    //     User.all()
+    //         .then((users) => {
+    //             res.send(users);
+    //         });
+    // });
 
     // REGISTER
     app.post('/user/register', (req, res) => {
@@ -34,12 +34,11 @@ module.exports = (app, passport) => {
         })
     });
 
-    //PROTECTED ROUTE
-    app.get('/user/profile', passport.authenticate('jwt', { session: false }),
-        function (req, res) {
-            res.json(req.user);
-        }
-    );
+   // PROTECTED ROUTE
+    app.post('/user/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
+        res.json(req.user);
+    });
+
 
     //LOGIN
     app.post('/user/login', (req, res) => {
