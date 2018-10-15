@@ -1,0 +1,33 @@
+<div class="jumbotron">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" class="form-control" ngModel #name="ngModel" required>
+    </div>
+    <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
+      Name is required.
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" class="form-control" ngModel #email="ngModel" required>
+    </div>
+    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+      Email is required.
+    </div>
+    <div class="form-group">
+      <label for="username">Uasername</label>
+      <input type="text" name="username" id="username" class="form-control" ngModel #username="ngModel" required>
+    </div>
+    <div class="alert alert-danger" *ngIf="username.touched && !username.valid">
+      Uasername is required.
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" class="form-control" ngModel #password="ngModel" required>
+    </div>
+    <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+      Password is required.
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary btn-block" [disabled]="!f.valid">
+  </form>
+</div>

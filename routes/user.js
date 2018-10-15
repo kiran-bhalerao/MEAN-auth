@@ -3,10 +3,10 @@ const User = require('../operations/user');
 const bcrypt = require('bcryptjs');
 const config = require('../config/config');
 
-module.exports = (app,passport) => {
+module.exports = (app, passport) => {
 
     //DUMMY 
-    app.get('/', (req, res) => {
+    app.get('/user', (req, res) => {
         User.all()
             .then((users) => {
                 res.send(users);
@@ -22,7 +22,15 @@ module.exports = (app,passport) => {
             password: req.body.password
         }, (err, user) => {
             if (!err && user)
-                console.log(user);
+                res.json({
+                    success: true,
+                    msg: 'User Registered.'
+                });
+            else
+                res.json({
+                    success: false,
+                    msg: 'User not Registered.'
+                });
         })
     });
 
