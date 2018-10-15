@@ -2,7 +2,14 @@
   <h1 class="display-2 title">MEAN APP</h1>
   <h3 class="sub-title">Welcome to MEAN authentication app build from scratch With Node and Angular.</h3>
   <div class="w-50 mx-auto mt-4">
-    <a class="btn w-25 btn-lg btn-outline-danger text-danger btn-hover" href="#" routerLink="/login">Login</a>&nbsp;
-    <a class="btn w-25 btn-lg btn-danger text-light" href="#" routerLink="/register">Rigister</a>
+    <div *ngIf="isLoggedIn() == true;else notLoggedIn">
+      <a class="btn w-25 btn-lg btn-outline-danger text-danger btn-hover" href="#" routerLink='/dashboard'>Dashboard
+      </a>&nbsp;
+      <a class="btn w-25 btn-lg btn-danger text-light" href="#" routerLink='/profile'>Profile</a>
+    </div>
+    <ng-template #notLoggedIn>
+      <a class="btn w-25 btn-lg btn-outline-danger text-danger btn-hover" href="#" routerLink="/login">Login</a>&nbsp;
+      <a class="btn w-25 btn-lg btn-danger text-light" href="#" routerLink="/register">Rigister</a>
+    </ng-template>
   </div>
 </div>

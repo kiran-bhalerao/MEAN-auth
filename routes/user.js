@@ -35,14 +35,14 @@ module.exports = (app, passport) => {
     });
 
     //PROTECTED ROUTE
-    app.post('/user/profile', passport.authenticate('jwt', { session: false }),
+    app.get('/user/profile', passport.authenticate('jwt', { session: false }),
         function (req, res) {
-            res.send(req.user);
+            res.json(req.user);
         }
     );
 
     //LOGIN
-    app.post('/user/authenticate', (req, res) => {
+    app.post('/user/login', (req, res) => {
         // res.send('user login');
         const username = req.body.username;
         const password = req.body.password;
@@ -50,7 +50,7 @@ module.exports = (app, passport) => {
         User.byUsername(username)
             .then((user) => {
                 if (!user)
-                    return res.json({ msg: 'User not found!' });
+                    return res.json({ success: false, msg: 'User not found!' });
                 bcrypt.compare(password, user.password)
                     .then((isMatch) => {
                         if (isMatch) {
@@ -60,6 +60,7 @@ module.exports = (app, passport) => {
 
                             return res.json({
                                 success: true,
+                                msg: 'Login successfuly!',
                                 token: 'Bearer ' + token,
                                 user: {
                                     id: user._id,
