@@ -1,7 +1,8 @@
 # MEAN_authentication 😄
-I build this project olny for fun.
-It uses JWT authentication system.
-👉 [Have a look] (https://mean-stack-auth-app.herokuapp.com)
+
+I build this project olny for fun.         
+It uses JWT authentication system.             
+👉  [Have a look](https://mean-stack-auth-app.herokuapp.com)
 
 # Project setup
 ```
